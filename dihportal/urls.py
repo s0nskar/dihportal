@@ -17,6 +17,7 @@ from django.conf.urls import url
 from django.contrib import admin
 
 from registrations import views as reg_views
+from projects import views as pro_views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -26,4 +27,5 @@ urlpatterns = [
     url(r'^proposal$', reg_views.proposal, name='proposal'),
     url(r'^profile$', reg_views.profile, name='profile'),
     url(r'^user$', reg_views.user, name='user'),
+    url(r'^fill$', pro_views.fill, name='fill'),
 ]
