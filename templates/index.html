@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>DIH Portal</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+	<script src="https://apis.google.com/js/platform.js" async defer></script>
+	<meta name="google-signin-client_id" content="741360271599-ochm3hs58fd5rli7lmjmrppr8qqdnacp.apps.googleusercontent.com">
+</head>
+<body>
+	<div class="g-signin2" data-onsuccess="onSignIn"></div>
+	<a href="#" onclick="signOut();">Sign out</a>
+	<script>
+	  function signOut() {
+	    var auth2 = gapi.auth2.getAuthInstance();
+	    auth2.signOut().then(function () {
+	      console.log('User signed out.');
+	    });
+	  }
+
+	  function onSignIn(googleUser) {
+	  	var id_token = googleUser.getAuthResponse().id_token;
+		  var profile = googleUser.getBasicProfile();
+		  console.log('ID: ' + profile.getId());
+		  console.log('Name: ' + profile.getName());
+		  console.log('Image URL: ' + profile.getImageUrl());
+		  console.log('Email: ' + profile.getEmail());
+
+		  $.ajax({
+			  type: "POST",
+			  url: "/tokensignin",
+			  data: {
+			  	'id_token': id_token,
+			  	'csrfmiddlewaretoken': "{{csrf_token}}"
+			  },
+			  success: function(data) {
+			  	if (data.success){
+			  		window.location.replace("/dashboard")
+			  	} else {
+			  		console.log(data.error);
+			  	}
+			  },
+			});
+		}
+
+	</script>
+</body>
+</html>

@@ -16,6 +16,14 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 
+from registrations import views as reg_views
+
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^$', reg_views.index, name='index'),
+    url(r'^tokensignin$', reg_views.callback, name='callback'),
+    url(r'^dashboard$', reg_views.dashboard, name='dashboard'),
+    url(r'^proposal$', reg_views.proposal, name='proposal'),
+    url(r'^profile$', reg_views.profile, name='profile'),
+    url(r'^user$', reg_views.user, name='user'),
 ]

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Dashboard</title>
+</head>
+<body>
+	<a href="{% url 'profile'%}">Edit your profile</a>
+	{% if not proposal %}
+	<a href="{% url 'proposal' %}">Create your proposal</a>
+	{% else %}
+	<div class="">
+		<p>{{proposal.title}}</p>
+		<p>{{proposal.use}}</p>
+		<p>{{proposal.description}}</p>
+		<p>{{proposal.submitted}}</p>
+	</div>
+	<a href="{% url 'proposal' %}">Edit your proposal</a>
+	{% endif %}
+</body>
+</html>
