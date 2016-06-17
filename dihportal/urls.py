@@ -28,4 +28,6 @@ urlpatterns = [
     url(r'^profile$', reg_views.profile, name='profile'),
     url(r'^user$', reg_views.user, name='user'),
     url(r'^fill$', pro_views.fill, name='fill'),
+    url(r'^secondfill$', pro_views.secondfill, name='secondfill'),
+    url(r'^evaluation$', pro_views.evaluation, name='evaluation'),
 ]

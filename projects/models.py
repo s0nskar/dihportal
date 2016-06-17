@@ -9,17 +9,29 @@ class Student(models.Model):
     email = models.EmailField()
     contact = models.CharField(max_length=20)
     summer_course = models.CharField(max_length=5)
-    mentor = models.CharField(max_length=50)
-    mentor_department = models.CharField(max_length=20)
+
+    def __unicode__(self):
+        return self.name
+
+class Mentor(models.Model):
+    name = models.CharField(max_length=30)
+    department = models.CharField(max_length=30)
 
     def __unicode__(self):
         return self.name
 
 class Project(models.Model):
     title = models.CharField(max_length=100)
+    mentor = models.ForeignKey(Mentor, null=True)
     team = models.ManyToManyField(Student)
     start_date = models.CharField(max_length=10)
     end_date = models.CharField(max_length=10)
+    plan_first_second = models.TextField()
+    plan_third_fourth = models.TextField()
+    plan_fifth_sixth = models.TextField()
+    plan_seventh_eight = models.TextField()
+    plan_after_eight = models.TextField(null=True, blank=True)
+    team_leader = models.ForeignKey(Student, null=True, related_name="project_team_leader")
 
     def __unicode__(self):
         return self.title

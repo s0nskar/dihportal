@@ -1,0 +1,35 @@
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+{% for project in projects %}
+<div class="container">
+  <h4>{{project.title | title}}</h4>
+  <div class="row">
+    <div class="col-sm-8" style="border-right: #000 1px solid;">
+      <p><b>Starting date: </b>{{project.start_date}}</p>
+      <p><b>First and Second Week: </b>{{project.plan_first_second}}</p>
+      <p><b>Third and Fourth Week: </b>{{project.plan_third_fourth}}</p>
+      <p><b>Fifth and Sixth Week: </b>{{project.plan_fifth_sixth}}</p>
+      <p><b>Mentor: </b>{{project.mentor.name | title}}, {{project.mentor.department | title}}</p>
+      <p><b>Team Leader: </b>{{project.team_leader.name | title }}, {{project.team_leader.contact }},
+        {{ project.team_leader.department | title }}</p>
+    </div>
+    <div class="col-sm-4">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Team</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for mem in project.team.all %}
+          <tr>
+            <td>{{mem.name | title}}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<hr style="color: #000 1px solid;">
+{% endfor %}
