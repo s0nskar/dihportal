@@ -30,4 +30,5 @@ urlpatterns = [
     url(r'^fill$', pro_views.fill, name='fill'),
     url(r'^secondfill$', pro_views.secondfill, name='secondfill'),
     url(r'^evaluation$', pro_views.evaluation, name='evaluation'),
+    url(r'^projects', pro_views.projects, name='projects'),
 ]

@@ -16,7 +16,7 @@ class Student(models.Model):
 class Mentor(models.Model):
     name = models.CharField(max_length=30)
     department = models.CharField(max_length=30)
-
+    
     def __unicode__(self):
         return self.name
 

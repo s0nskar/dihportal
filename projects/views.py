@@ -92,3 +92,9 @@ def evaluation(request):
     context['projects'] = p
 
     return render(request, 'evaluation.html', context)
+
+def projects(request):
+    context = {}
+    p = Project.objects.all()
+    context['projects'] = p
+    return render(request, 'projects.html', context)
