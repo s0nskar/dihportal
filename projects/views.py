@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.shortcuts import get_object_or_404
+
 
 import csv
 
@@ -93,8 +95,8 @@ def evaluation(request):
 
     return render(request, 'evaluation.html', context)
 
-def projects(request):
+def project(request, project_id):
     context = {}
-    p = Project.objects.all()
-    context['projects'] = p
-    return render(request, 'projects.html', context)
+    p = get_object_or_404(Project, id=project_id)
+    context['project'] = p
+    return render(request, 'project.html', context)

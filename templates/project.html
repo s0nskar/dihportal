@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.1.1/normalize.min.css"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
+  </head>
+  <body>
+    <div class="container u-max-full-width">
+      <p>
+        Title: <strong>{{project.title | upper}}</strong>
+      </p>
+      <strong>Description: </strong>
+      <ul>
+        <li>{{project.plan_first_second | capfirst}}</li>
+        <li>{{project.plan_third_fourth | capfirst}}</li>
+        <li>{{project.plan_fifth_sixth | capfirst}}</li>
+        <li>{{project.plan_seventh_eight | capfirst}}</li>
+        <li>{{project.plan_after_eight | capfirst}}</li>
+      </ul>
+      <p>
+        <strong>Mentor</strong>: {{project.mentor.name | title}}, <i>({{project.mentor.department | title}})</i>
+      </p>
+      <table class="u-full-width">
+        <thead>
+          <th>
+            Name <i>(Roll no.)</i>
+          </th>
+          <th>
+            Department
+          </th>
+          <th>
+            Email
+          </th>
+        </thead>
+        <tbody>
+          {% for mem in project.team.all %}
+          <tr>
+            <td>
+              {{mem.name | title}} <i>({{mem.roll_no}})</i>
+            </td>
+            <td>
+              {{mem.department | title}}
+            </td>
+            <td>
+              {{mem.email}}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>

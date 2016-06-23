@@ -17,6 +17,7 @@ class ProjectAdmin(admin.ModelAdmin):
                             })
         }
     }
+    readonly_fields = ('project_link',)
     search_fields = ('title',)
     list_display = ('title', 'start_date', 'end_date')
 
@@ -24,6 +25,10 @@ class ProjectAdmin(admin.ModelAdmin):
         ProjectsInLine,
     ]
     exclude = ('team', )
+
+    def project_link(self, obj):
+        url = urlresolvers.reverse('project', args=(obj.id, ))
+        return format_html('<a href={}>Project Link</a>'.format(url))
 
 class StudentAdmin(admin.ModelAdmin):
     list_display = ('name', 'roll_no', 'department', 'contact',)
