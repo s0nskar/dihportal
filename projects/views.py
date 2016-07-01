@@ -90,13 +90,56 @@ def secondfill(request):
 # Making evalution
 def evaluation(request):
     context = {}
-    p = Project.objects.all()
+    panel = request.GET.get('panel', '')
+    if panel:
+        panel = get_object_or_404(Panel, pk=panel)
+        p = panel.projects.all()
+    else:
+        p = Project.objects.all()
     context['projects'] = p
-
     return render(request, 'evaluation.html', context)
+
+def panelwise(request):
+    context = {}
+    panel = request.GET.get('panel', '')
+    if panel:
+        panel = get_object_or_404(Panel, pk=panel)
+        p = panel.projects.all()
+    else:
+        return HttpResponse("No panel found!!")
+    students = set()
+    mentors = set()
+
+    for project in p:
+        mentors.add(project.mentor)
+        s = project.team.all()
+        for student in s:
+            students.add(student)
+    context['projects'] = p
+    context['panel'] = panel
+    context['students'] = students
+    context['mentors'] = mentors
+    return render(request, 'panelwise.html', context)
 
 def project(request, project_id):
     context = {}
     p = get_object_or_404(Project, id=project_id)
     context['project'] = p
     return render(request, 'project.html', context)
+
+def addtopanel(request):
+    if request.method == "POST":
+        panel = request.POST['panel']
+        selected = request.POST.getlist('selected')
+        print selected
+        p = Panel.objects.get(pk=panel)
+
+        for project in selected:
+            p.projects.add(Project.objects.get(pk=project))
+        return HttpResponse('Done')
+
+def admindetail(request):
+    context = {}
+    panels = Panel.objects.all()
+    context['panels'] = panels
+    return render(request, 'admindetail.html', context)

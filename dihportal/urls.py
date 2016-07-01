@@ -20,6 +20,10 @@ from registrations import views as reg_views
 from projects import views as pro_views
 
 urlpatterns = [
+    url(r'^admin/addtopanel$', pro_views.addtopanel, name='addtopanel'),
+    url(r'^admin/helper$', pro_views.admindetail, name='admindetail'),
+    url(r'^admin/evaluation$', pro_views.evaluation, name='evaluation'),
+    url(r'^admin/panelwise$', pro_views.panelwise, name='panelwise'),
     url(r'^admin/', admin.site.urls),
     url(r'^$', reg_views.index, name='index'),
     url(r'^tokensignin$', reg_views.callback, name='callback'),
@@ -29,6 +33,5 @@ urlpatterns = [
     url(r'^user$', reg_views.user, name='user'),
     url(r'^fill$', pro_views.fill, name='fill'),
     url(r'^secondfill$', pro_views.secondfill, name='secondfill'),
-    url(r'^evaluation$', pro_views.evaluation, name='evaluation'),
     url(r'^project/(?P<project_id>\d+)$', pro_views.project, name='project'),
 ]

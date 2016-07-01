@@ -35,3 +35,10 @@ class Project(models.Model):
 
     def __unicode__(self):
         return self.title
+
+class Panel(models.Model):
+    name = models.CharField(max_length=100)
+    projects = models.ManyToManyField(Project, blank=True)
+
+    def __unicode__(self):
+        return self.name

@@ -1,0 +1,47 @@
+{% extends "admin/base_site.html" %}
+{% block content %}
+<div class="results">
+	<table id="result_list" style="width:100%">
+		<thead>
+		<tr>
+
+		<th scope="col"  class="column-__str__">
+		   
+		   <div class="text"><span>Panel</span></div>
+		   <div class="clear"></div>
+		</th>
+		<th scope="col"  class="column-__str__">
+		   
+		   <div class="text"><span>Details</span></div>
+		   <div class="clear"></div>
+		</th>
+		<th scope="col"  class="column-__str__">
+		   
+		   <div class="text"><span>Evaluation</span></div>
+		   <div class="clear"></div>
+		</th>
+		</tr>
+		</thead>
+		<tbody>
+		{% for panel in panels %}
+		<tr>
+			<th class="field-__str__"><a href="/admin/projects/panel/{{panel.pk}}/change/">{{panel.name}}</a></th>
+			<th><a href="/admin/panelwise?panel={{panel.pk}}">Details</a></th>
+			<th><a href="/admin/evaluation?panel={{panel.pk}}">Evaluation</a></th>
+		</tr>
+		{% endfor %}
+		</tbody>
+
+	</table>
+</div>
+{% endblock %}
+{% block nav-global %}
+<div id="user-tools">
+    Welcome,
+    <strong>dihadmin</strong>.
+    <a href="/admin/helper">Detail Links</a> /
+    <a href="/">View site</a> /
+    <a href="/admin/password_change/">Change password</a> /
+    <a href="/admin/logout/">Log out</a>
+</div>
+{% endblock %}
