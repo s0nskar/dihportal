@@ -20,7 +20,7 @@ def check_token_validity(id_token):
 			return json_data
 
 def index(request):
-	return render(request, 'index.html', {})
+	return render(request, 'home.html', {})
 
 def callback(request):
 	if request.method == 'POST':
