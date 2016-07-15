@@ -1,13 +1,14 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
-
+from django.contrib.admin.views.decorators import staff_member_required
 
 import csv
 
 from .models import *
 
 # For filling database of the csv
+@staff_member_required
 def fill(request):
     with open('projects.csv') as f:
         print "Read"
@@ -52,6 +53,7 @@ def fill(request):
             rownum += 1
     return HttpResponse("Done")
 
+@staff_member_required
 def secondfill(request):
     with open('teamleader.csv') as f:
         reader = csv.reader(f)
@@ -88,6 +90,7 @@ def secondfill(request):
 
 
 # Making evalution
+@staff_member_required
 def evaluation(request):
     context = {}
     panel = request.GET.get('panel', '')
@@ -99,6 +102,7 @@ def evaluation(request):
     context['projects'] = p
     return render(request, 'evaluation.html', context)
 
+@staff_member_required
 def panelwise(request):
     context = {}
     panel = request.GET.get('panel', '')
@@ -121,12 +125,14 @@ def panelwise(request):
     context['mentors'] = mentors
     return render(request, 'panelwise.html', context)
 
+@staff_member_required
 def project(request, project_id):
     context = {}
     p = get_object_or_404(Project, id=project_id)
     context['project'] = p
     return render(request, 'project.html', context)
 
+@staff_member_required
 def addtopanel(request):
     if request.method == "POST":
         panel = request.POST['panel']
@@ -138,6 +144,7 @@ def addtopanel(request):
             p.projects.add(Project.objects.get(pk=project))
         return HttpResponse('Done')
 
+@staff_member_required
 def admindetail(request):
     context = {}
     panels = Panel.objects.all()

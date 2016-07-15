@@ -21,6 +21,7 @@ class Proposal(models.Model):
 	thrust = models.CharField(max_length=30)
 	util = models.CommaSeparatedIntegerField(max_length=5)
 	submitted = models.DateTimeField(auto_now_add=True)
+	approved = models.NullBooleanField()
 
 	def __unicode__(self):
 		return self.title

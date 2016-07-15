@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="Sanskar Modi">
+    <meta name="google-signin-client_id" content="741360271599-ochm3hs58fd5rli7lmjmrppr8qqdnacp.apps.googleusercontent.com">
 
     <title>Design & Innovation Hub</title>
 
@@ -31,7 +32,8 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
+    <script src="https://apis.google.com/js/platform.js"></script>
+    <script src="/static/js/google-signin.js"></script>
 </head>
 
 <body id="page-top">
@@ -46,7 +48,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand page-scroll" href="#page-top">Home</a>
+                <a class="navbar-brand page-scroll" href="#page-top">DIH Portal, IIT BHU</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -68,7 +70,15 @@
                         <a class="page-scroll" href="#contact">Contact</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#login">Log In</a>
+                        <a class="page-scroll" href="/dashboard">Dashboard</a>
+                    </li>
+                    <li>
+                      {% if request.user.is_authenticated %}
+                      <div hidden class="g-signin2 page-scroll" data-onsuccess="onSignIn"></div>
+											<a class="page-scroll" href="#" onclick="signOut();">Logout</a>
+											{% else %}
+											<div class="g-signin2 page-scroll" data-onsuccess="onSignIn"></div>
+											{% endif %}
                     </li>
                 </ul>
             </div>

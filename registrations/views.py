@@ -1,7 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required
 
 from .forms import *
 
@@ -45,6 +46,7 @@ def callback(request):
 			return JsonResponse({'success': True})
 		return JsonResponse({'error': 'Login token is not valid'})
 
+@login_required
 def dashboard(request):
 	context = {}
 	try:
@@ -54,6 +56,7 @@ def dashboard(request):
 		pass
 	return render(request, 'dashboard.html', context)
 
+@login_required
 def proposal(request):
 	if request.method == "POST":
 		try:
@@ -77,6 +80,7 @@ def proposal(request):
 		# form.fields['title'].widget.attrs['readonly'] = True
 		return render(request, 'proposal.html', {'form': form})
 
+@login_required
 def profile(request):
 	if request.method == "POST":
 		# Getting user profile instance and passing it into form
@@ -104,6 +108,6 @@ def profile(request):
 		return render(request, 'profile.html', {'user_form':user_form,\
 				'profile_form': profile_form})
 
-def user(request):
-    User.objects.create_superuser('dihadmin', 'sanskarmodi97@gmail.com', 'password')
-    return HttpResponse("Made")
+# def user(request):
+#     User.objects.create_superuser('dihadmin', 'sanskarmodi97@gmail.com', 'password')
+#     return HttpResponse("Made")
